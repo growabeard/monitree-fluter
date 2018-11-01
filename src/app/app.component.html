@@ -1,0 +1,53 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+<button (click)="getMonitreeReadings()">BUNGUS</button>
+<div *ngFor="let reading of readings">
+  <div class="row">
+    <div class="col">
+      {{reading.id}}
+    </div>
+    <div class="col">
+      {{reading.name}}
+    </div>
+    <div class="col">
+      {{reading.date}}
+    </div>
+    <div class="col">
+      {{reading.temp}}
+    </div>
+    <div class="col">
+      {{reading.creator}}
+    </div>
+    <div class="col">
+      {{reading.moisture}}
+    </div>
+    <div class="col">
+      {{reading.humidity}}
+    </div>
+    <div class="col">
+      {{reading.light}}
+    </div>
+    <div class="col">
+      {{reading.watered}}
+    </div>
+  </div>
+</div>
+<canvas baseChart width="400" height="400"
+[datasets]="lineChartData"
+[labels]="lineChartLabels"
+[options]="lineChartOptions"
+[colors]="lineChartColors"
+[legend]="lineChartLegend"
+[chartType]="lineChartType"></canvas>
+<div class="col-md-6" style="margin-bottom: 10px">
+  <table class="table table-responsive table-condensed">
+    <tr>
+      <th *ngFor="let label of lineChartLabels">{{label}}</th>
+    </tr>
+    <tr *ngFor="let d of lineChartData">
+      <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+    </tr>
+  </table>
+</div>
+
+<router-outlet></router-outlet>
