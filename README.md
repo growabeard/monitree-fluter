@@ -1,2 +1,2 @@
-# monitree-fluter
-The flutter client for the monitree app.
+# monitree-front
+The front end client for the monitree app.
