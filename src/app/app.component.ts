@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
-import { MonitreeService } from './services/monitree.service'
-import { READINGS } from './mock-readings'
+import { BaseChartDirective } from 'ng2-charts';
+
+import { MonitreeService } from './services/monitree.service';
+import { READINGS } from './mock-readings';
+import { MonitreeModel } from './shared/models/monitree-info.model';
+import { Graphable } from './shared/models/graphable.model';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -10,30 +18,62 @@ import { READINGS } from './mock-readings'
 })
 export class AppComponent {
   title = 'monitree-front';
-  readings = [];
-  temperatures = [];
+  readings: MonitreeModel[] = [];
+  temperatures: Graphable = new Graphable();
+  moistures: Graphable = new Graphable();
+  lights: Graphable = new Graphable();
+  humidities: Graphable = new Graphable();
+  tsLabels: string[];
+  start=  new Date();
+  end=  new Date();
+  @ViewChild(BaseChartDirective)
+  public chart: BaseChartDirective;
 
-  constructor(private monitreeService:MonitreeService) {}
+  constructor(private monitreeService:MonitreeService) {
+    this.temperatures.label = 'Temp';
+    this.temperatures.data = [];
+    this.moistures.label = 'Moisture';
+    this.moistures.data = [];
+    this.lights.label = 'Light';
+    this.lights.data = [];
+    this.humidities.label = 'Humidity';
+    this.humidities.data = [];
+    this.tsLabels = [];
+    this.start.setDate(this.start.getDate() - 7);
+  }
 
   getMonitreeReadings() {
-    console.log('bungus');
-  //   this.monitreeService.getMonitreeReadings().subscribe(data => {
-  //     this.readings = data;  
-  //   },
-  //   err => console.error(err)
-  // );
-    this.readings = READINGS;
-    // this.readings.forEach(function(reading) {
-    //   this.temperatures.push(reading.temperature);
-    // }); 
+    this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
+        // this.readings = data;  
+        this.readings = READINGS;
+      },
+      err => console.error(err)
+    );
+    this.readings.forEach(reading => {
+      this.temperatures.data.push(reading.temp);
+      this.moistures.data.push(reading.moisture);
+      this.lights.data.push(reading.light);
+      this.humidities.data.push(reading.humidity);
+      this.tsLabels.push(reading.date);
+    });
+
+    this.chart.chart.update();
+  }
+
+  updateStart(event) {
+    this.start = event.value;
+  }
+
+  updateEnd(event) {
+    this.end = event.value;
   }
 
   public lineChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    this.temperatures,
+    this.moistures,
+    this.lights,
+    this.humidities
   ];
-  public lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions:any = {
     responsive: true
   };

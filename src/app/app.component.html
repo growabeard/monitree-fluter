@@ -1,51 +1,32 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-<button (click)="getMonitreeReadings()">BUNGUS</button>
-<div *ngFor="let reading of readings">
-  <div class="row">
-    <div class="col">
-      {{reading.id}}
-    </div>
-    <div class="col">
-      {{reading.name}}
-    </div>
-    <div class="col">
-      {{reading.date}}
-    </div>
-    <div class="col">
-      {{reading.temp}}
-    </div>
-    <div class="col">
-      {{reading.creator}}
-    </div>
-    <div class="col">
-      {{reading.moisture}}
-    </div>
-    <div class="col">
-      {{reading.humidity}}
-    </div>
-    <div class="col">
-      {{reading.light}}
-    </div>
-    <div class="col">
-      {{reading.watered}}
-    </div>
-  </div>
-</div>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker1" placeholder="Choose a start date"
+    (dateChange)="updateStart($event)" [value]="start">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1 [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Choose an end date"
+    [value]="end">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 [startAt]="endDate"></mat-datepicker>
+  </mat-form-field>
+  <button (click)="getMonitreeReadings()">BUNGUS</button>
 <canvas baseChart width="400" height="400"
 [datasets]="lineChartData"
-[labels]="lineChartLabels"
+[labels]="tsLabels"
 [options]="lineChartOptions"
-[colors]="lineChartColors"
 [legend]="lineChartLegend"
 [chartType]="lineChartType"></canvas>
-<div class="col-md-6" style="margin-bottom: 10px">
+<div style="margin-bottom: 10px; margin-left: 5em;">
   <table class="table table-responsive table-condensed">
     <tr>
-      <th *ngFor="let label of lineChartLabels">{{label}}</th>
+      <th class="headcol"></th><td *ngFor="let label of tsLabels">{{label}}</td>
     </tr>
     <tr *ngFor="let d of lineChartData">
-      <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+      <th class="headcol">{{d.label}}</th><td *ngFor="let label of tsLabels; let j=index">{{d && d.data[j]}}</td>
     </tr>
   </table>
 </div>

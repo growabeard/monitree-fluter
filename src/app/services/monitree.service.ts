@@ -23,9 +23,12 @@ export class MonitreeService {
   public getMonitreeModel() { return this.monitreeModel; }
   public setMonitreeModel(data) { this.monitreeModel = data; }
 
-  public getMonitreeReadings() {
-    // return this.http.get(location.origin + '/monitree/v1/readings?startDate=09-01-2018%2000%3A00%3A00&endDate=11-10-2018%2000%3A00%3A00', {
-    return this.http.get('http://monitree.herokuapp.com/monitree/v1/readings?startDate=09-01-2018%2000%3A00%3A00&endDate=11-10-2018%2000%3A00%3A00', {
+  public getMonitreeReadings(start, end) {
+    console.log(start);
+    console.log(end);
+
+    return this.http.get(location.origin + '/monitree/v1/readings?startDate=10-01-2018%2000%3A00%3A00&endDate=11-20-2018%2000%3A00%3A00', {
+    // return this.http.get(location.origin + '/monitree/v1/readings?startDate=' + start + '&endDate=' + end, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
