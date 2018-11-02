@@ -44,8 +44,8 @@ export class AppComponent {
 
   getMonitreeReadings() {
     this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
-        // this.readings = data;  
-        this.readings = READINGS;
+        this.readings = data;  
+        //this.readings = READINGS;
       },
       err => console.error(err)
     );
