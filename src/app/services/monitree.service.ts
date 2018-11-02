@@ -27,8 +27,8 @@ export class MonitreeService {
     console.log(start);
     console.log(end);
 
-    return this.http.get(location.origin + '/monitree/v1/readings?startDate=10-01-2018%2000%3A00%3A00&endDate=11-20-2018%2000%3A00%3A00', {
-    // return this.http.get(location.origin + '/monitree/v1/readings?startDate=' + start + '&endDate=' + end, {
+    return this.http.get(location.origin + '/readings?startDate=10-01-2018%2000%3A00%3A00&endDate=11-20-2018%2000%3A00%3A00', {
+    // return this.http.get(location.origin + '/readings?startDate=' + start + '&endDate=' + end, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
