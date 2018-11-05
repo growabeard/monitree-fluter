@@ -24,14 +24,25 @@ export class MonitreeService {
   public setMonitreeModel(data) { this.monitreeModel = data; }
 
   public getMonitreeReadings(start, end) {
-    console.log(start);
-    console.log(end);
+    start = this.getDateTimeFormat(start);
+    end = this.getDateTimeFormat(end);
 
-    return this.http.get(location.origin + '/readings?startDate=10-01-2018%2000%3A00%3A00&endDate=11-20-2018%2000%3A00%3A00', {
-    // return this.http.get(location.origin + '/readings?startDate=' + start + '&endDate=' + end, {
+    return this.http.get(location.origin + '/readings?startDate=' + start + '&endDate=' + end, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  public getDateTimeFormat(inDate: Date) {
+    // want format like 10-01-2018 00:00:00
+    var returnDate = '';
+    var date = inDate.getDate();
+    var month = inDate.getMonth() + 1;
+    var year = inDate.getFullYear();
+    
+    returnDate = month + '-' + date + '-' + year + ' 00:00:00';
+
+    return encodeURIComponent(returnDate);
   }
 }

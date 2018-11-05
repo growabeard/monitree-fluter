@@ -18,7 +18,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'monitree-front';
-  readings: MonitreeModel[] = [];
+  readings;
   temperatures: Graphable = new Graphable();
   moistures: Graphable = new Graphable();
   lights: Graphable = new Graphable();
@@ -44,20 +44,31 @@ export class AppComponent {
 
   getMonitreeReadings() {
     this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
-        this.readings = data;  
-        //this.readings = READINGS;
+        this.readings = data;
+        // this.readings = READINGS;
+
+        this.temperatures.data = [];
+        this.moistures.data = [];
+        this.lights.data = [];
+        this.humidities.data = [];
+        this.tsLabels = [];
+
+        this.readings.forEach(reading => {
+          this.temperatures.data.push(reading.temp);
+          this.moistures.data.push(reading.moisture);
+          this.lights.data.push(reading.light);
+          this.humidities.data.push(reading.humidity);
+          this.tsLabels.push(reading.date);
+        });
+    
+        this.chart.chart.update();
       },
       err => console.error(err)
     );
-    this.readings.forEach(reading => {
-      this.temperatures.data.push(reading.temp);
-      this.moistures.data.push(reading.moisture);
-      this.lights.data.push(reading.light);
-      this.humidities.data.push(reading.humidity);
-      this.tsLabels.push(reading.date);
-    });
+  }
 
-    this.chart.chart.update();
+  getStyle(butts) {
+    console.log(butts);
   }
 
   updateStart(event) {
@@ -75,7 +86,16 @@ export class AppComponent {
     this.humidities
   ];
   public lineChartOptions:any = {
-    responsive: true
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      xAxes: [{
+              ticks: {
+                  display: false
+              }
+        }
+      ]
+    }
   };
   public lineChartColors = [
     { // grey

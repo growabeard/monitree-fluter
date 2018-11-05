@@ -14,7 +14,7 @@
     <mat-datepicker #picker2 [startAt]="endDate"></mat-datepicker>
   </mat-form-field>
   <button (click)="getMonitreeReadings()">BUNGUS</button>
-<canvas baseChart width="400" height="400"
+<canvas baseChart height="80vw"
 [datasets]="lineChartData"
 [labels]="tsLabels"
 [options]="lineChartOptions"
@@ -26,7 +26,7 @@
       <th class="headcol"></th><td *ngFor="let label of tsLabels">{{label}}</td>
     </tr>
     <tr *ngFor="let d of lineChartData">
-      <th class="headcol">{{d.label}}</th><td *ngFor="let label of tsLabels; let j=index">{{d && d.data[j]}}</td>
+      <th [style]="getStyle()" class="headcol">{{d.label}}</th><td [style]="getStyle()" *ngFor="let label of tsLabels; let j=index">{{d && d.data[j]}}</td>
     </tr>
   </table>
 </div>

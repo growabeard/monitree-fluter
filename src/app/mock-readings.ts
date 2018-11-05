@@ -84,7 +84,7 @@ export const READINGS: MonitreeModel[] = [
         "date": "2018-10-05 15:22:11.201",
         "temp": 77,
         "creator": "sensor",
-        "moisture": 665,
+        "moisture": 66,
         "humidity": 42,
         "light": null,
         "watered": false
@@ -172,7 +172,7 @@ export const READINGS: MonitreeModel[] = [
         "date": "2018-10-05 16:07:10.254",
         "temp": 80.6,
         "creator": "sensor",
-        "moisture": 629,
+        "moisture": 62,
         "humidity": 39,
         "light": null,
         "watered": false
