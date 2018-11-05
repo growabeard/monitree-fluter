@@ -23,6 +23,7 @@ export class AppComponent {
   moistures: Graphable = new Graphable();
   lights: Graphable = new Graphable();
   humidities: Graphable = new Graphable();
+  watered: boolean[];
   tsLabels: string[];
   start=  new Date();
   end=  new Date();
@@ -40,18 +41,21 @@ export class AppComponent {
     this.humidities.data = [];
     this.tsLabels = [];
     this.start.setDate(this.start.getDate() - 7);
+    this.end.setDate(this.end.getDate() + 1);
+    this.watered = [];
   }
 
   getMonitreeReadings() {
-    this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
-        this.readings = data;
-        // this.readings = READINGS;
+    // this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
+    //     this.readings = data;
+        this.readings = READINGS;
 
         this.temperatures.data = [];
         this.moistures.data = [];
         this.lights.data = [];
         this.humidities.data = [];
         this.tsLabels = [];
+        this.watered = [];
 
         this.readings.forEach(reading => {
           this.temperatures.data.push(reading.temp);
@@ -59,16 +63,13 @@ export class AppComponent {
           this.lights.data.push(reading.light);
           this.humidities.data.push(reading.humidity);
           this.tsLabels.push(reading.date);
+          this.watered.push(reading.watered);
         });
     
         this.chart.chart.update();
-      },
-      err => console.error(err)
-    );
-  }
-
-  getStyle(butts) {
-    console.log(butts);
+    //   },
+    //   err => console.error(err)
+    // );
   }
 
   updateStart(event) {

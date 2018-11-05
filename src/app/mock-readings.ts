@@ -747,7 +747,7 @@ export const READINGS: MonitreeModel[] = [
         "moisture": 52,
         "humidity": 32,
         "light": 84,
-        "watered": false
+        "watered": true
     },
     {
         "id": 101,

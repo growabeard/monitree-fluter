@@ -26,7 +26,14 @@
       <th class="headcol"></th><td *ngFor="let label of tsLabels">{{label}}</td>
     </tr>
     <tr *ngFor="let d of lineChartData">
-      <th [style]="getStyle()" class="headcol">{{d.label}}</th><td [style]="getStyle()" *ngFor="let label of tsLabels; let j=index">{{d && d.data[j]}}</td>
+      <th class="headcol">{{d.label}}</th><td *ngFor="let label of tsLabels; let j=index">{{d && d.data[j]}}</td>
+    </tr>
+    <tr>
+      <th class="headcol">Watered</th>
+      <td *ngFor="let label of tsLabels; let j=index">
+        <div *ngIf="watered[j]; else notWatered"><img src="../assets/icons/water.svg"></div>
+        <ng-template #notWatered><img src="../assets/icons/no-water.svg"></ng-template>
+      </td>
     </tr>
   </table>
 </div>
