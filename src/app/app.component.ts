@@ -46,9 +46,9 @@ export class AppComponent {
   }
 
   getMonitreeReadings() {
-    // this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
-    //     this.readings = data;
-        this.readings = READINGS;
+    this.monitreeService.getMonitreeReadings(this.start, this.end).subscribe(data => {
+        this.readings = data;
+        // this.readings = READINGS;
 
         this.temperatures.data = [];
         this.moistures.data = [];
@@ -67,9 +67,9 @@ export class AppComponent {
         });
     
         this.chart.chart.update();
-    //   },
-    //   err => console.error(err)
-    // );
+      },
+      err => console.error(err)
+    );
   }
 
   updateStart(event) {

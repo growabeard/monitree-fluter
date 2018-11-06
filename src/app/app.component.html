@@ -31,8 +31,8 @@
     <tr>
       <th class="headcol">Watered</th>
       <td *ngFor="let label of tsLabels; let j=index">
-        <div *ngIf="watered[j]; else notWatered"><img src="../assets/icons/water.svg"></div>
-        <ng-template #notWatered><img src="../assets/icons/no-water.svg"></ng-template>
+        <div *ngIf="watered[j]; else notWatered"><img src="assets/icons/water.svg"></div>
+        <ng-template #notWatered><img src="assets/icons/no-water.svg"></ng-template>
       </td>
     </tr>
   </table>
