@@ -33,12 +33,20 @@ export class AppComponent {
   constructor(private monitreeService:MonitreeService) {
     this.temperatures.label = 'Temp';
     this.temperatures.data = [];
+    this.temperatures.fill = false;
+    this.temperatures.pointRadius = 0;
     this.moistures.label = 'Moisture';
     this.moistures.data = [];
+    this.moistures.fill = false;
+    this.moistures.pointRadius = 0;
     this.lights.label = 'Light';
     this.lights.data = [];
+    this.lights.fill = false;
+    this.lights.pointRadius = 0;
     this.humidities.label = 'Humidity';
     this.humidities.data = [];
+    this.humidities.fill = false;
+    this.humidities.pointRadius = 0;
     this.tsLabels = [];
     this.start.setDate(this.start.getDate() - 7);
     this.end.setDate(this.end.getDate() + 1);
@@ -96,7 +104,13 @@ export class AppComponent {
               }
         }
       ]
-    }
+    },
+    tooltips: {
+      mode: 'label',
+    },
+    hover: {
+      mode: 'label'
+    },
   };
   public lineChartColors = [
     { // grey
