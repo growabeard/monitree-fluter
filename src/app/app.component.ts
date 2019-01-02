@@ -48,7 +48,7 @@ export class AppComponent {
     this.humidities.fill = false;
     this.humidities.pointRadius = 0;
     this.tsLabels = [];
-    this.start.setDate(this.start.getDate() - 7);
+    this.start.setDate(this.start.getDate() - 3);
     this.end.setDate(this.end.getDate() + 1);
     this.watered = [];
   }
